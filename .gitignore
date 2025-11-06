@@ -1,0 +1,40 @@
+# ===== PYTHON BACKEND =====
+venv/
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.db
+instance/
+*.sqlite3
+
+# ===== NODE / REACT FRONTEND =====
+node_modules/
+dist/
+build/
+.cache/
+.next/
+out/
+
+# Vite / React build output
+dist/
+*.local
+
+# ===== ENV & CONFIG SECRETS =====
+*.env
+.env.*
+*.pem
+*.crt
+*.key
+
+# ===== GENERAL =====
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+.npm/
+yarn-error.log
+package-lock.json
