@@ -8,7 +8,8 @@ import axios from "axios";
 export let forceUpdateHistory = () => {};
 
 function Componenthistory() {
- 
+ const API = "https://movie-recommandation-system-2n59.onrender.com";
+    
  
     const [history, setHistory] = useState([]);
 
@@ -16,7 +17,7 @@ function Componenthistory() {
     const fetchHistory = async () => {
     try 
     {
-      const res = await axios.get("http://127.0.0.1:5000/history");
+      const res = await axios.get(`${API}/history`);
       setHistory(res.data);
     } 
     catch (err) 
