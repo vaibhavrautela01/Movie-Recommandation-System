@@ -8,32 +8,25 @@ from dotenv import load_dotenv
 import random
 
 
+# Load .env variables
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-
+# Configure Gemini API
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-
-mongo_client = MongoClient("mongodb://localhost:27017/")
-
+# ✅ Connect to MongoDB Atlas (not local)
+MONGO_URI = os.getenv("MONGO_URI")
+mongo_client = MongoClient(MONGO_URI)
 db = mongo_client["movieDB"]
-
 collection = db["recommendations"]
 
 
-
-
-
-
 @app.route("/recommend", methods=["POST"])
-
 def recommend_movies():
-
     data = request.get_json()
-
     preference = data.get("preference", "")
 
     if not preference:
@@ -66,17 +59,11 @@ def recommend_movies():
     return jsonify({"recommended_movies": movies})
 
 
-
-
-
 @app.route("/history", methods=["GET"])
 def get_history():
     history = list(collection.find({}, {"_id": 0}).sort("timestamp", -1))
     return jsonify(history)
 
 
-
-
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
